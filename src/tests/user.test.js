@@ -74,8 +74,30 @@ test("POST -> BASE_URL, Should return statusCode 201, and res,body.firstName ===
         expect(res.statusCode).toBe(200)
         expect(res.body).toBeDefined()
         expect(res.body.user).toBeDefined()
+        expect(res.body.token).toBeDefined()
         expect(res.body.user.email).toBe(user.email)
 
        
        })
+
+       // error 401
+       test("POST -> 'BASE_URL/LOGIN, should return statuscode 401", async()=>{
+       
+        const hits ={
+            email: user.email,
+            password: "invalid" // error en la contraseña
+
+        }
+
+        const res = await request(app)
+        .post(`${BASE_URL}/login`)
+        .send(hits)
+
+        expect(res.statusCode).toBe(401)
+    
+    
+    })
+
+    
+
 

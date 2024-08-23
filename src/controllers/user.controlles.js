@@ -46,7 +46,7 @@ const login = catchError(async(req, res) => {
     if(!user) return res.status(401).json({ message: "Invalid credentials"})
 
     const isValid = await bcrypt.compare(password, user.password)
-    if(!isValid) return res.status(401).json({ message: "Invalid credentials"});
+    if(!isValid) return res.status(401).json({ message: "Invalid"});
 
     //generar token
     
@@ -71,6 +71,8 @@ const logged = catchError(async(req,res)=>{
         
 
 })
+
+
 
 module.exports = {
     getAll,
