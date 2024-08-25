@@ -106,8 +106,6 @@ test("POST -> BASE_URL, Should return statusCode 201, and res.body.title === pro
        expect(res.body.categoryId).toBeDefined()
        expect(res.body.categoryId).toBe(category.id)
 
-
-
        })
 
     test("DELETE -> BASE_URL/id, Should return statusCode 204", async()=>{

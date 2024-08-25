@@ -7,7 +7,21 @@ const Category = require('../models/Category');
 const getAll = catchError(async(req, res) => {
     const {id}=req.user
 
-    const results = await Cart.findAll({include:[Product]},{where:{userId:id}});
+    const results = await Cart.findAll({
+        include:[
+        
+        {
+            model: Product,
+            attributes: {exclude:['updatedAt','createdAt']},
+            include:[
+                {
+                model:Category,
+                attributes:['name']
+            }
+        ]
+
+        }
+    ]},{where:{userId:id}});
     return res.json(results);
 });
 
@@ -18,14 +32,28 @@ const create = catchError(async(req, res) => {
     // delete req.body.userId
     const newBody ={...req.body, userId: id}
 
-
     const result = await Cart.create(newBody);
     return res.status(201).json(result);
 });
 
 const getOne = catchError(async(req, res) => {
     const { id } = req.params;
-    const result = await Cart.findByPk(id,{include:[Product]});
+    const result = await Cart.findByPk(id,{
+        include:[
+        
+        {
+            model: Product,
+            attributes: {exclude:['updatedAt','createdAt']},
+            include:[
+                {
+                model:Category,
+                attributes:['name']
+            }
+        ]
+
+        }
+    ]});
+    
     if(!result) return res.sendStatus(404);
     return res.json(result);
 });
