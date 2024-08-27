@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const router = require('./routes');
+const path = require('path');//
 const errorHandler = require('./utils/errorHandler');
 require('dotenv').config();
 
@@ -15,6 +16,9 @@ app.use(helmet({
 }));
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, 'public'))); 
+
+
 app.use('/api/v1', router);
 
 app.get('/', (req, res) => {
@@ -22,6 +26,7 @@ app.get('/', (req, res) => {
 })
 
 // middlewares después de las rutas
+
 app.use(errorHandler)
 
 module.exports = app;
