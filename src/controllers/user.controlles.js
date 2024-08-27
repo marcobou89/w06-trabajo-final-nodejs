@@ -54,14 +54,11 @@ const login = catchError(async(req, res) => {
     const token = jwt.sign(
         {user},
         process.env.TOKEN_SECRET,
-        { expiresIn: '2d' }
+        { expiresIn: '10d' }
 )
 
 return res.status(200).json({user,token})
 
-
-
-    // return res.status(201).json(user);
 })
 
 const logged = catchError(async(req,res)=>{

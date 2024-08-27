@@ -93,7 +93,7 @@ test("POST -> BASE_URL, Should return statusCode 201, and res.body.title === car
        expect(res.body).toBeDefined()
     expect(res.body).toHaveLength(1)
 
-        console.log(res.body);
+        // console.log(res.body);
         
         //1:n
         expect(res.body[0].id).toBe(product.id)
